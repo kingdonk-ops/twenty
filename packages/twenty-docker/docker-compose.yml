@@ -60,6 +60,9 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
+      # first boot runs migrations + metadata upgrade + cron registration (~2min);
+      # without a start period the dependent worker is aborted before the server is ready
+      start_period: 180s
     restart: always
 
   worker:
